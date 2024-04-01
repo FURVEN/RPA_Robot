@@ -1,18 +1,19 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="_01_ACME_Login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="_01_ACME_Login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_str아이디" Type="InArgument(x:String)" />
-    <x:Property Name="in_sstr패스워드" Type="InArgument(ss:SecureString)" />
+    <x:Property Name="in_sstr패스워드" Type="InArgument(x:String)" />
+    <x:Property Name="in_ACMEurl" Type="InArgument(x:String)" />
   </x:Members>
   <this:_01_ACME_Login.in_str아이디>
     <InArgument x:TypeArguments="x:String" />
   </this:_01_ACME_Login.in_str아이디>
   <this:_01_ACME_Login.in_sstr패스워드>
-    <InArgument x:TypeArguments="ss:SecureString" />
+    <InArgument x:TypeArguments="x:String" />
   </this:_01_ACME_Login.in_sstr패스워드>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>840,1889.6</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>840,1322.4</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>_01_ACME_Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -110,14 +111,14 @@
       <AssemblyReference>System.Management.Automation</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="_01_ACME_Login" sap:VirtualizedContainerService.HintSize="611.2,1824.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="_01_ACME_Login" sap:VirtualizedContainerService.HintSize="611.2,1257.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="548.8,182.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;ACME_Login 시작...&quot;]" />
-    <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" BrowserType="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" DisplayName="브라우저열기 | Open Browser" sap:VirtualizedContainerService.HintSize="548.8,300" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="https://acme-test.uipath.com/login">
+    <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" BrowserType="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" DisplayName="브라우저열기 | Open Browser" sap:VirtualizedContainerService.HintSize="548.8,300" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="[in_ACMEurl+&quot;login&quot;]">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -134,7 +135,7 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="548.8,1088" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="548.8,520.8" sap2010:WorkflowViewState.IdRef="TryCatch_2">
       <TryCatch.Try>
         <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="449.6,249.6" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="777e8b61fc9082b062d4fea0ca2e726e" Selector="&lt;html app='chrome.exe' title='ACME System 1 - Log In' /&gt;" TimeoutMS="5000">
           <ui:BrowserScope.Body>
@@ -204,19 +205,19 @@
         </Catch>
       </TryCatch.Catches>
       <TryCatch.Finally>
-        <Sequence sap:VirtualizedContainerService.HintSize="512,816.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Sequence sap:VirtualizedContainerService.HintSize="512,865.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="449.6,730.4" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="777e8b61fc9082b062d4fea0ca2e726e" Selector="&lt;html app='chrome.exe' title='ACME System 1 - Log In' /&gt;" TimeoutMS="5000">
+          <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="449.6,779.2" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="777e8b61fc9082b062d4fea0ca2e726e" Selector="&lt;html app='chrome.exe' title='ACME System 1 - Log In' /&gt;" TimeoutMS="5000">
             <ui:BrowserScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="실행" sap:VirtualizedContainerService.HintSize="416,560" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                <Sequence DisplayName="실행" sap:VirtualizedContainerService.HintSize="416,608.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -234,9 +235,9 @@
                       </ui:Target>
                     </ui:TypeInto.Target>
                   </ui:TypeInto>
-                  <ui:TypeSecureText AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Secure Text 'INPUT  password'" EmptyField="True" sap:VirtualizedContainerService.HintSize="353.6,147.2" sap2010:WorkflowViewState.IdRef="TypeSecureText_4" SecureText="[in_sstr패스워드]">
-                    <ui:TypeSecureText.Target>
-                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="687ec3fa-d79e-4fb2-af6c-a048d45678d0" InformativeScreenshot="b00ddd78d40c1aa1ee4c8aedf677f38b" Selector="&lt;webctrl id='password' tag='INPUT' /&gt;">
+                  <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Into 'INPUT  email'" EmptyField="True" sap:VirtualizedContainerService.HintSize="333.6,156" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="[in_sstr패스워드]">
+                    <ui:TypeInto.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="cb047443-1750-4277-afd5-b53bbbfdb98a" InformativeScreenshot="6ae79de3fb15b4a13d1ee6a77e506bde" Selector="&lt;webctrl id='password' tag='INPUT' /&gt;">
                         <ui:Target.TimeoutMS>
                           <InArgument x:TypeArguments="x:Int32" />
                         </ui:Target.TimeoutMS>
@@ -244,8 +245,8 @@
                           <InArgument x:TypeArguments="ui:WaitForReady" />
                         </ui:Target.WaitForReady>
                       </ui:Target>
-                    </ui:TypeSecureText.Target>
-                  </ui:TypeSecureText>
+                    </ui:TypeInto.Target>
+                  </ui:TypeInto>
                   <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DelayMS="5000" DisplayName="Click 'BUTTON'" sap:VirtualizedContainerService.HintSize="353.6,130.4" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT">
                     <ui:Click.CursorPosition>
                       <ui:CursorPosition Position="Center">
